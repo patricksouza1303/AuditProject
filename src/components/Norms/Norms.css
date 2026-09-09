@@ -1,0 +1,50 @@
+.norms-carousel { position: relative; max-width: 780px; margin: 0 auto; }
+.norms-track-wrap { overflow: hidden; border-radius: var(--radius-lg); }
+.norms-track { display: flex; transition: transform .45s cubic-bezier(.65,0,.35,1); }
+.norm-slide {
+  flex: 0 0 100%;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-lg);
+  padding: 44px;
+  text-align: center;
+}
+.norm-slide .norm-badge {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--gradient-brand);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  margin-bottom: 18px;
+}
+.norm-slide h3 { font-size: 24px; }
+.norm-slide p { margin-top: 16px; color: var(--text-muted); font-size: 15.5px; line-height: 1.7; }
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  margin-top: 28px;
+}
+.carousel-btn {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  display: flex; align-items: center; justify-content: center;
+  transition: all .18s ease;
+}
+.carousel-btn:hover { background: var(--primary); border-color: var(--primary); color: #fff; }
+.carousel-dots { display: flex; gap: 8px; }
+.carousel-dots button {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: var(--border);
+  padding: 0;
+  transition: all .2s ease;
+}
+.carousel-dots button.active { width: 22px; border-radius: 4px; background: var(--primary); }

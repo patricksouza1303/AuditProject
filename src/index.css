@@ -1,0 +1,201 @@
+/* ============================================
+   AuditISO — Design System (global/shared styles)
+   Component-specific styles live next to each
+   component in src/components/<Name>/<Name>.css
+   ============================================ */
+
+:root {
+  /* Pastel surfaces */
+  --bg: #faf9fd;
+  --bg-soft: #f4f1fb;
+  --bg-lavender: #efe9fb;
+  --bg-mint: #e9f6f0;
+  --bg-peach: #fdf2e9;
+  --surface: #ffffff;
+  --surface-alpha: rgba(255, 255, 255, 0.7);
+
+  /* Text */
+  --text: #2c2a3d;
+  --text-muted: #6b6883;
+  --text-faint: #9a97b0;
+
+  /* Accents */
+  --primary: #7c6ef2;
+  --primary-dark: #6353e6;
+  --primary-soft: #ece8fd;
+  --teal: #4fb8a6;
+  --teal-soft: #dff3ee;
+  --coral: #f2907c;
+
+  --gradient-brand: linear-gradient(135deg, #9b8bf4 0%, #7c6ef2 45%, #4fb8a6 100%);
+  --gradient-text: linear-gradient(120deg, #6353e6 0%, #7c6ef2 40%, #4fb8a6 100%);
+
+  /* Borders / shadows */
+  --border: #e9e5f5;
+  --border-soft: #f0edf9;
+  --shadow-sm: 0 1px 2px rgba(44, 42, 61, 0.04), 0 1px 1px rgba(44, 42, 61, 0.03);
+  --shadow-md: 0 8px 24px rgba(76, 66, 140, 0.08);
+  --shadow-lg: 0 20px 60px rgba(76, 66, 140, 0.14);
+  --shadow-glow: 0 0 0 1px rgba(124, 110, 242, 0.08), 0 12px 32px rgba(124, 110, 242, 0.16);
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 999px;
+
+  --container: 1180px;
+  --header-h: 72px;
+}
+
+/* ---------- Dark theme (toggled via ThemeContext, data-theme on <html>) ---------- */
+:root[data-theme="dark"] {
+  --bg: #14121f;
+  --bg-soft: #1b1830;
+  --bg-lavender: #2a2444;
+  --bg-mint: #1f3a30;
+  --bg-peach: #332818;
+  --surface: #1e1b2f;
+  --surface-alpha: rgba(30, 27, 47, 0.7);
+
+  --text: #f1eefc;
+  --text-muted: #b3aecb;
+  --text-faint: #8783a1;
+
+  --primary: #9c8bf7;
+  --primary-dark: #c3b5ff;
+  --primary-soft: #2c2650;
+  --teal: #5fd1bb;
+  --teal-soft: #163832;
+  --coral: #f2a08c;
+
+  --gradient-brand: linear-gradient(135deg, #9c8bf7 0%, #b39dfb 45%, #5fd1bb 100%);
+  --gradient-text: linear-gradient(120deg, #c3b5ff 0%, #9c8bf7 40%, #5fd1bb 100%);
+
+  --border: #362f57;
+  --border-soft: #241f3a;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.55);
+  --shadow-glow: 0 0 0 1px rgba(156, 139, 247, 0.2), 0 12px 32px rgba(156, 139, 247, 0.3);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+h1, h2, h3, h4 {
+  margin: 0;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: pointer; }
+input, textarea { font-family: inherit; }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--primary-dark);
+  background: var(--primary-soft);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+.section-head {
+  max-width: 640px;
+  margin: 0 auto 56px;
+  text-align: center;
+}
+
+.section-head h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  margin-top: 16px;
+}
+
+.section-head p {
+  margin-top: 14px;
+  color: var(--text-muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+section { position: relative; padding: 100px 0; }
+
+/* ---------- Buttons (shared across Header, Hero, Quote, Login) ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 24px;
+  border-radius: var(--radius-full);
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color .18s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--gradient-brand);
+  color: #fff;
+  box-shadow: var(--shadow-glow);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(124, 110, 242, 0.28); }
+
+.btn-ghost {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:hover { border-color: var(--primary); color: var(--primary-dark); transform: translateY(-1px); }
+
+.btn-block { width: 100%; }
+.btn-lg { padding: 15px 28px; font-size: 16px; }
+
+@media (max-width: 720px) {
+  section { padding: 72px 0; }
+}
+
+/* Smooth color transition when the theme toggles */
+.header,
+.service-card,
+.norm-slide,
+.step,
+.contact-card,
+.quote-form,
+.field input,
+.field textarea,
+.auth-card,
+.float-card,
+.btn-ghost {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
