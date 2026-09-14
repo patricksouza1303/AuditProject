@@ -1,0 +1,45 @@
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: curtainUp 0.9s cubic-bezier(.16,1,.3,1) 2s forwards;
+}
+@keyframes curtainUp { to { transform: translateY(-101%); } }
+
+.curtain-mark { text-align: center; }
+.curtain-mark svg { width: 66px; height: 66px; }
+
+.curtain-check {
+  stroke: var(--gold);
+  stroke-width: 6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: curtainDraw 0.7s cubic-bezier(.16,1,.3,1) 0.25s forwards;
+}
+.curtain-ring {
+  stroke: rgba(255, 255, 255, 0.25);
+  stroke-width: 3;
+  fill: none;
+  stroke-dasharray: 220;
+  stroke-dashoffset: 220;
+  animation: curtainDraw 1s cubic-bezier(.16,1,.3,1) 0.05s forwards;
+}
+@keyframes curtainDraw { to { stroke-dashoffset: 0; } }
+
+.curtain-mark p {
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  margin-top: 18px;
+  opacity: 0;
+  animation: curtainFade 0.5s ease 0.8s forwards;
+}
+@keyframes curtainFade { to { opacity: 1; } }

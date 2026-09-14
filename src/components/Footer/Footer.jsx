@@ -44,7 +44,7 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>© {year} AuditISO. Todos os direitos reservados.</span>
-          <span>Conformidade que Vende.</span>
+          <span>Sua empresa pronta para qualquer auditoria.</span>
         </div>
       </div>
     </footer>

@@ -4,75 +4,71 @@ import "./Services.css";
 const SERVICES = [
   {
     tone: "tone-1",
-    color: "#6353e6",
-    title: "Auditoria Tributária",
+    color: "#17A2A2",
+    title: "Gestão da Qualidade",
     description:
-      "Exame das demonstrações contábeis (balanço, DRE) para garantir que refletem a real situação da empresa, assegurando conformidade com as normas contábeis.",
+      "ISO 13485, ISO 9001 e RDC 665/2022 — Boas Práticas de Fabricação, Armazenamento e Distribuição para fabricantes, importadores e distribuidores de produtos para saúde.",
     icon: (color) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M4 19h16M6 19V9m5 10V5m5 14v-7" stroke={color} strokeWidth="2" strokeLinecap="round" />
+        <path d="M12 2 3 6v6c0 5 4 8 9 10 5-2 9-5 9-10V6l-9-4Z" stroke={color} strokeWidth="2" strokeLinejoin="round" />
+        <path d="M9 12.5l2 2 4-4.5" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
   {
     tone: "tone-2",
-    color: "#2f8577",
-    title: "Auditoria Independente",
+    color: "#2F6FA8",
+    title: "Consultoria em Sistemas de Gestão Integrada",
     description:
-      "Realizada por terceiros para emitir um parecer (opinião) isento sobre a precisão das informações para investidores e credores.",
+      "Implantação, adequação, manutenção e melhoria contínua dos processos, com soluções práticas, personalizadas e alinhadas aos requisitos regulatórios e às necessidades do negócio.",
     icon: (color) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <circle cx="12" cy="12" r="8" stroke={color} strokeWidth="2" />
-        <path d="M12 8v4l3 2" stroke={color} strokeWidth="2" strokeLinecap="round" />
+        <circle cx="12" cy="12" r="3" stroke={color} strokeWidth="2" />
+        <path
+          d="M12 3v2.5M12 18.5V21M4.5 12H2M22 12h-2.5M6 6l1.7 1.7M16.3 16.3 18 18M6 18l1.7-1.7M16.3 7.7 18 6"
+          stroke={color}
+          strokeWidth="2"
+          strokeLinecap="round"
+        />
       </svg>
     ),
   },
   {
     tone: "tone-3",
-    color: "#c07a3a",
-    title: "Auditoria de Sistemas / TI",
+    color: "#D4A73C",
+    title: "Assuntos Regulatórios",
     description:
-      "Avaliação da segurança, integridade e eficiência dos sistemas de informação e dados financeiros.",
+      "Acompanhamento da legislação, interpretação de requisitos e dossiês técnicos para manter sua empresa em conformidade com os órgãos reguladores.",
     icon: (color) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <rect x="4" y="4" width="16" height="12" rx="2" stroke={color} strokeWidth="2" />
-        <path d="M8 20h8" stroke={color} strokeWidth="2" strokeLinecap="round" />
+        <path d="M12 3v18M12 6l-6 1.5L4.5 12a3 3 0 0 0 6 0L9 7.5M12 6l6 1.5L19.5 12a3 3 0 0 1-6 0L15 7.5" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M6 20h12" stroke={color} strokeWidth="2" strokeLinecap="round" />
       </svg>
     ),
   },
   {
     tone: "tone-1",
-    color: "#6353e6",
-    title: "Auditoria Interna",
+    color: "#17A2A2",
+    title: "Auditorias de 1ª e 2ª Parte",
     description:
-      "Avaliação da eficiência da gestão, controle de custos e conformidade operacional com procedimentos internos.",
+      "Auditoria interna e auditoria de fornecedores para identificar não conformidades antes que o auditor externo o faça.",
     icon: (color) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M4 4h16v16H4z" stroke={color} strokeWidth="2" />
-        <path d="M8 9h8M8 13h5" stroke={color} strokeWidth="2" strokeLinecap="round" />
+        <circle cx="10.5" cy="10.5" r="6.5" stroke={color} strokeWidth="2" />
+        <path d="M20 20l-4.3-4.3" stroke={color} strokeWidth="2" strokeLinecap="round" />
       </svg>
     ),
   },
   {
     tone: "tone-2",
-    color: "#2f8577",
-    title: "Auditoria Operacional",
+    color: "#2F6FA8",
+    title: "Treinamentos",
     description:
-      "Focada na melhoria da eficiência, eficácia e economicidade das operações da empresa, buscando reduzir desperdícios.",
+      "Capacitação técnica e comportamental para que sua equipe entenda e sustente o sistema de gestão no dia a dia.",
     icon: (color) => (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M3 17l6-6 4 4 8-8" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-  },
-  {
-    tone: "tone-3",
-    color: "#c07a3a",
-    title: "Gestão de Riscos",
-    description: "Identificação e mapeamento de riscos operacionais, financeiros ou reputacionais.",
-    icon: (color) => (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2 3 6v6c0 5 4 8 9 10 5-2 9-5 9-10V6l-9-4Z" stroke={color} strokeWidth="2" strokeLinejoin="round" />
+        <path d="M2 8.5 12 4l10 4.5-10 4.5L2 8.5Z" stroke={color} strokeWidth="2" strokeLinejoin="round" />
+        <path d="M6 10.7v4.3c0 1.7 2.7 3 6 3s6-1.3 6-3v-4.3" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>
     ),
   },
