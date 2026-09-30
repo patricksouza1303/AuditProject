@@ -65,6 +65,59 @@
 }
 .norm-link:hover { text-decoration: underline; }
 
+/* ---------- Abertura do agendamento ---------- */
+.norm-cards.open { align-items: start; }
+.norm-cards .norm-card.norm-hidden { display: none; }
+.norm-cards .norm-card.leaving {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+  pointer-events: none;
+}
+.norm-cards .norm-card.returning { animation: normBack 0.5s 0.45s cubic-bezier(.16,1,.3,1) backwards; }
+@keyframes normBack { from { opacity: 0; transform: scale(0.94); } }
+
+.norm-cards.open-left .norm-card.selected { grid-column: 1; grid-row: 1; }
+.norm-cards.open-left .norm-booking { grid-column: 2 / span 2; grid-row: 1; }
+.norm-cards.open-right .norm-card.selected { grid-column: 3; grid-row: 1; }
+.norm-cards.open-right .norm-booking { grid-column: 1 / span 2; grid-row: 1; }
+
+.norm-booking {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  border-radius: 20px;
+  padding: 34px 36px;
+  box-shadow: var(--shadow-md);
+  animation: bookingIn 0.55s 0.3s cubic-bezier(.16,1,.3,1) backwards;
+}
+.norm-cards.open-right .norm-booking { animation-name: bookingInRight; }
+@keyframes bookingIn { from { opacity: 0; transform: translateX(-28px); } }
+@keyframes bookingInRight { from { opacity: 0; transform: translateX(28px); } }
+.norm-cards .norm-booking.closing { animation: bookingOut 0.3s cubic-bezier(.7,0,.84,0) forwards; }
+.norm-cards.open-right .norm-booking.closing { animation-name: bookingOutRight; }
+@keyframes bookingOut { to { opacity: 0; transform: translateX(-28px); } }
+@keyframes bookingOutRight { to { opacity: 0; transform: translateX(28px); } }
+
+.norm-booking h3 { font-size: 24px; margin: 12px 0 8px; }
+.norm-booking-intro { font-size: 14.5px; color: var(--text-muted); margin-bottom: 22px; }
+.norm-booking-close {
+  position: absolute;
+  top: 16px; right: 18px;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border-soft);
+  cursor: pointer;
+  transition: color .18s ease, border-color .18s ease;
+}
+.norm-booking-close:hover { color: var(--text); border-color: var(--border); }
+
 @media (max-width: 980px) {
   .norm-cards { grid-template-columns: 1fr; }
+  .norm-cards.open .norm-card.selected,
+  .norm-cards.open .norm-booking { grid-column: auto; grid-row: auto; }
 }

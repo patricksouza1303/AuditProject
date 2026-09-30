@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Hero.css";
 
-const NORM_TAGS = ["ISO 9001", "ISO 13485", "ISO 14001", "RDC 665/2022", "RDC 48/2013"];
-
 const BARS = [
   { h: 28, d: "0.05s" },
   { h: 41, d: "0.17s" },
@@ -23,78 +21,42 @@ const POINTS = [
 
 export default function Hero() {
   const [go, setGo] = useState(false);
-  const [count, setCount] = useState(0);
 
   useEffect(() => {
     const t = setTimeout(() => setGo(true), 100);
     return () => clearTimeout(t);
   }, []);
 
-  useEffect(() => {
-    if (!go) return;
-    const target = 94;
-    const start = setTimeout(() => {
-      const step = target / 44;
-      let c = 0;
-      const i = setInterval(() => {
-        c += step;
-        if (c >= target) {
-          c = target;
-          clearInterval(i);
-        }
-        setCount(Math.round(c));
-      }, 22);
-    }, 2300);
-    return () => clearTimeout(start);
-  }, [go]);
-
   return (
-    <>
-      <section className={`hero ${go ? "go" : ""}`} id="top">
-        <div className="hero-grid"></div>
+    <section className={`hero ${go ? "go" : ""}`} id="top">
         <div className="container">
           <div className="hero-copy">
-            <span className="eyebrow">Qualidade · Regulatório · Auditoria</span>
+            <span className="hero-kicker">Qualidade · Regulatório · Auditoria</span>
             <h1>
-              Sua empresa <span className="grad">pronta</span> para qualquer auditoria.
+              Sua empresa pronta <span className="grad">para qualquer auditoria.</span>
             </h1>
             <p>
-              Gestão da Qualidade que transforma requisitos em resultados.
-              Somos especialistas em Gestão da Qualidade atuando em consultorias, treinamentos e auditorias em sistemas de gestão da qualidade, Normas ISO, Boas Práticas e regulamentações de empresas. Oferecemos atendimento personalizadas para atender às necessidades específicas do seu negócio, transformando em resultados e preparando sua empresa para auditorias e inspeções.
+              Auditamos o seu sistema de Gestão da Qualidade nas normas ISO 13485, ISO 9001 e RDC 665/2022
+              para fabricantes, importadores e distribuidores de produtos para saúde.
             </p>
 
             <div className="hero-actions">
               <a href="#normas" className="btn btn-primary btn-lg">
                 Agendar uma proposta →
               </a>
-              <a href="#servicos" className="btn btn-ghost btn-lg">
-                Conhecer serviços
-              </a>
             </div>
 
             <div className="hero-meta">
-              <div>
-                <strong>+120</strong>
-                <span>Empresas certificadas</span>
-              </div>
-              <div>
-                <strong>5</strong>
-                <span>Normas e regulamentos</span>
-              </div>
-              <div>
-                <strong>98%</strong>
-                <span>Taxa de aprovação</span>
-              </div>
+              <strong>Especialistas dedicados</strong>
+              <strong>Anos de experiência somada</strong>
+              <strong>Foco na qualidade</strong>
             </div>
           </div>
 
           <div className="hero-visual">
             <div className="chart-card">
               <div className="chart-top">
-                <div>
-                  <span className="chart-lbl">Aderência aos requisitos</span>
-                  <b className="chart-num">{count}%</b>
-                </div>
+                <span className="chart-lbl">Aderência aos requisitos</span>
                 <span className="chart-badge">▲ +66 pts</span>
               </div>
               <div className="plot">
@@ -132,18 +94,6 @@ export default function Hero() {
             </div>
           </div>
         </div>
-      </section>
-
-      <section className="logo-strip">
-        <div className="container">
-          <span className="strip-label">Normas e regulamentos que atendemos</span>
-          <div className="strip-tags">
-            {NORM_TAGS.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+    </section>
   );
 }

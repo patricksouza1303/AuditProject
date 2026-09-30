@@ -43,12 +43,7 @@ export default function Contact() {
     <section id="contato">
       <div className="container">
         <Reveal className="section-head">
-          <span className="eyebrow">Fale conosco</span>
-          <h2>Entre em Contato</h2>
-          <p>
-            Nossa equipe está preparada para auxiliar sua empresa em todas as etapas da auditoria e
-            certificação.
-          </p>
+          <h2>Fale Conosco</h2>
         </Reveal>
 
         <div className="contact-grid">

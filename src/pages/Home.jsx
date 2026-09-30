@@ -5,7 +5,6 @@ import Services from "../components/Services/Services.jsx";
 import Norms from "../components/Norms/Norms.jsx";
 import Processes from "../components/Processes/Processes.jsx";
 import Team from "../components/Team/Team.jsx";
-import Quote from "../components/Quote/Quote.jsx";
 import Contact from "../components/Contact/Contact.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 
@@ -20,7 +19,6 @@ export default function Home() {
         <Norms />
         <Processes />
         <Team />
-        <Quote />
         <Contact />
       </main>
       <Footer />

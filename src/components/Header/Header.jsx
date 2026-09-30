@@ -4,12 +4,8 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 import "./Header.css";
 
 const NAV_LINKS = [
-  { href: "#top", label: "Home" },
-  { href: "#servicos", label: "Serviços" },
-  { href: "#normas", label: "Normas" },
-  { href: "#processo", label: "Processo" },
-  { href: "#equipe", label: "Equipe" },
-  { href: "#contato", label: "Contato" },
+  { href: "#processo", label: "Como atuamos" },
+  { href: "#equipe", label: "Quem somos" },
 ];
 
 export default function Header() {
@@ -26,20 +22,22 @@ export default function Header() {
   return (
     <header className={`header ${scrolled ? "scrolled" : ""}`}>
       <div className="container">
-        <a href="#top" className="logo">AuditISO</a>
-
-        <nav className="nav-links">
-          {NAV_LINKS.map((link) => (
-            <a key={link.href} href={link.href}>
-              {link.label}
-            </a>
-          ))}
-        </nav>
+        <a href="#top" className="logo">
+          <span className="logo-check" aria-hidden="true">✓</span>
+          AuditISO
+        </a>
 
         <div className="header-actions">
+          <nav className="nav-links">
+            {NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href}>
+                {link.label}
+              </a>
+            ))}
+          </nav>
           <ThemeToggle />
-          <Link to="/login" className="btn btn-ghost">
-            Acesso dos Auditores
+          <Link to="/login" className="btn btn-primary header-cta">
+            Acesso para funcionários
           </Link>
           <button
             className="nav-toggle"
@@ -62,7 +60,7 @@ export default function Header() {
           <ThemeToggle />
         </div>
         <Link to="/login" className="btn btn-primary" onClick={() => setOpen(false)}>
-          Acesso dos Auditores
+          Acesso para funcionários
         </Link>
       </div>
     </header>

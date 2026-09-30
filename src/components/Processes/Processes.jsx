@@ -2,75 +2,129 @@ import { useState } from "react";
 import Reveal from "../Reveal/Reveal.jsx";
 import "./Processes.css";
 
+// Geometria do anel PDCA (viewBox 500x500, centro em 250,250)
+const R_OUT = 200;
+const R_IN = 90;
+const GAP = 4; // metade do espaço entre os segmentos
+const ARROW_OUT = 172;
+const ARROW_IN = 116;
+const ARROW_MID = 144;
+const ARROW_TIP = 26;
+
+// Um quadrante com seta na saída e encaixe na entrada, do topo (0°) até a direita (90°).
+// Os demais segmentos são o mesmo formato rotacionado.
+const SEGMENT_PATH = (() => {
+  const c = 250;
+  const pt = (x, y) => `${(c + x).toFixed(2)},${(c + y).toFixed(2)}`;
+  const outY = Math.sqrt(R_OUT ** 2 - GAP ** 2);
+  const inY = Math.sqrt(R_IN ** 2 - GAP ** 2);
+  return [
+    `M${pt(GAP, -outY)}`,
+    `A${R_OUT},${R_OUT} 0 0,1 ${pt(outY, -GAP)}`,
+    `L${pt(ARROW_OUT, -GAP)}`,
+    `L${pt(ARROW_MID, -GAP + ARROW_TIP)}`,
+    `L${pt(ARROW_IN, -GAP)}`,
+    `L${pt(inY, -GAP)}`,
+    `A${R_IN},${R_IN} 0 0,0 ${pt(GAP, -inY)}`,
+    `L${pt(GAP, -ARROW_IN)}`,
+    `L${pt(GAP + ARROW_TIP, -ARROW_MID)}`,
+    `L${pt(GAP, -ARROW_OUT)}`,
+    "Z",
+  ].join(" ");
+})();
+
+const LETTER_RADIUS = 145;
+const DOTS_RADIUS = 228;
+const REG_RADIUS = 268;
+const REG_CIRCUMFERENCE = 2 * Math.PI * REG_RADIUS;
+const REG_TEXT = "ASSUNTOS REGULATÓRIOS · ".repeat(5);
+const POP_DISTANCE = 10;
+
 const SEGMENTS = [
-  { key: "plan", color: "#2E86AB", rotate: -180, x: "94px", y: "126px", side: "left" },
-  { key: "do", color: "#5FAD41", rotate: -90, x: "94px", y: "126px", side: "right" },
-  { key: "check", color: "#E8A33D", rotate: 0, x: "88px", y: "172px", side: "right-bottom" },
-  { key: "act", color: "#1F4E6B", rotate: 90, x: "98px", y: "172px", side: "left-bottom" },
-];
+  { key: "plan", letter: "P", color: "#F7A04A", rotate: 270 },
+  { key: "do", letter: "D", color: "#23AEC0", rotate: 0 },
+  { key: "check", letter: "C", color: "#1A80BE", rotate: 90 },
+  { key: "act", letter: "A", color: "#EE5D55", rotate: 180 },
+].map((seg) => {
+  const angle = ((seg.rotate + 45) * Math.PI) / 180;
+  const sin = Math.sin(angle);
+  const cos = Math.cos(angle);
+  return {
+    ...seg,
+    lx: 250 + LETTER_RADIUS * sin,
+    ly: 250 - LETTER_RADIUS * cos,
+    // deslocamento do segmento ativo para fora do círculo
+    dx: `${(POP_DISTANCE * sin).toFixed(2)}px`,
+    dy: `${(-POP_DISTANCE * cos).toFixed(2)}px`,
+  };
+});
 
 const DATA = {
   plan: {
     eyebrow: "PLAN · Planejar",
-    title: "Consultoria em Sistemas de Gestão",
-    desc: "Estruturamos o sistema antes de qualquer auditoria bater na porta. Diagnóstico, plano e cronograma com responsáveis definidos.",
+    title: "Consultoria em Sistemas de Gestão da Qualidade",
+    desc: "Apoiamos sua empresa na implantação, adequação, manutenção e melhoria contínua dos processos.",
     items: [
-      "Diagnóstico e gap analysis",
-      "Implantação de SGQ (ISO 9001, ISO 13485)",
+      "Diagnóstico e Gap Analysis",
+      "Implantação de Sistemas de Gestão (ISO 9001, ISO 13485, entre outros)",
       "Gestão de riscos",
       "Mapeamento e melhoria de processos",
       "Documentação e padronização",
+      "Acompanhamento e sustentação do sistema",
     ],
   },
   do: {
     eyebrow: "DO · Executar",
-    title: "Execução dos processos e requisitos",
-    desc: "Colocamos o plano em prática junto com a sua equipe — não entregamos manual e vamos embora.",
+    title: "Execução dos Processos e Requisitos",
+    desc: "Implementamos as ações planejadas com foco na eficiência e conformidade.",
     items: [
       "Estruturação de processos",
-      "Adequação a requisitos normativos",
+      "Adequação a requisitos normativos e regulatórios",
       "Controle de documentos",
       "Gestão de mudanças",
       "Monitoramento de indicadores",
+      "Engajamento das equipes",
     ],
   },
   check: {
     eyebrow: "CHECK · Verificar",
-    title: "Auditorias de 1ª e 2ª parte",
-    desc: "Encontramos o problema antes do auditor externo encontrar. Relatório objetivo, sem jargão inútil.",
+    title: "Auditorias de 1ª e 2ª Parte",
+    desc: "Avaliamos a conformidade dos processos e identificamos oportunidades de melhoria.",
     items: [
-      "Auditoria interna (1ª parte)",
-      "Auditoria de fornecedores (2ª parte)",
-      "Auditoria baseada em risco",
-      "Simulado de inspeção ANVISA",
-      "Relatórios e planos de ação",
+      "Auditorias internas (1ª parte)",
+      "Auditorias de fornecedores e parceiros (2ª parte)",
+      "Auditorias de processos e sistemas",
+      "Relatórios claros e objetivos",
+      "Planos de ação e acompanhamento",
     ],
   },
   act: {
     eyebrow: "ACT · Agir",
-    title: "Treinamentos e cultura da qualidade",
-    desc: "O sistema só se sustenta quando as pessoas entendem o porquê. É aqui que o ciclo se fecha e recomeça.",
+    title: "Treinamentos",
+    desc: "Desenvolvemos pessoas e fortalecemos a cultura da qualidade.",
     items: [
-      "Treinamentos técnicos e comportamentais",
-      "Normas ISO 9001, 13485 e aplicáveis",
+      "Sistemas de Gestão da Qualidade",
+      "Normas ISO (9001, 13485, e outras aplicáveis)",
       "Boas Práticas",
-      "Ferramentas da qualidade",
-      "In company ou online",
+      "Auditorias",
+      "Ferramentas da Qualidade",
+      "Treinamentos personalizados presenciais ou online",
     ],
   },
   reg: {
-    eyebrow: "Anel externo · Contexto",
+    eyebrow: "Contexto · Todo o ciclo",
     title: "Assuntos Regulatórios",
-    desc: "Não é uma etapa do ciclo — é o ambiente em que o ciclo inteiro opera. Muda a legislação, muda tudo lá dentro.",
+    desc: "Apoiamos sua empresa no atendimento aos requisitos regulatórios aplicáveis ao seu segmento.",
     items: [
       "Acompanhamento da legislação",
       "Interpretação de requisitos regulatórios",
       "Dossiês técnicos e submissões",
-      "Adequação às Boas Práticas",
+      "Adequação às Boas Práticas e normas aplicáveis",
       "Suporte em inspeções e órgãos reguladores",
     ],
   },
 };
+
 
 export default function Processes() {
   const [active, setActive] = useState("plan");
@@ -80,57 +134,43 @@ export default function Processes() {
     <section className="process" id="processo">
       <div className="container">
         <Reveal className="section-head">
-          <span className="eyebrow">Como trabalhamos</span>
-          <h2>Processo</h2>
-          <p>Clique em uma etapa do ciclo — ou no anel externo — para ver o que fazemos nela.</p>
+          <h2>Como Trabalhamos</h2>
         </Reveal>
 
         <Reveal className="pdca">
           <div className="wheel">
-            <svg viewBox="0 0 500 500">
+            <svg viewBox="-40 -40 580 580">
               <defs>
-                <path id="ringpath" d="M250,250 m0,-206 a206,206 0 1,1 -0.1,0" />
+                <path id="regpath" d={`M250,${250 - REG_RADIUS} a${REG_RADIUS},${REG_RADIUS} 0 1,1 -0.01,0`} />
               </defs>
-              <circle
-                className={`outer-ring-2 ${active === "reg" ? "on" : ""}`}
+              <g
+                className={`reg-ring ${active === "reg" ? "on" : ""}`}
                 onClick={() => setActive("reg")}
                 onMouseEnter={() => setActive("reg")}
-                cx="250" cy="250" r="206"
-              />
-              <g className="ringtext">
-                <text>
-                  <textPath href="#ringpath" startOffset="0">
-                    ASSUNTOS REGULATÓRIOS · O CONTEXTO QUE ENVOLVE TODO O CICLO · ASSUNTOS REGULATÓRIOS · O CONTEXTO QUE ENVOLVE TODO O CICLO ·{" "}
+              >
+                <circle className="reg-band" cx="250" cy="250" r={REG_RADIUS} />
+                <text className="reg-text">
+                  <textPath href="#regpath" textLength={REG_CIRCUMFERENCE - 1} lengthAdjust="spacing">
+                    {REG_TEXT}
                   </textPath>
                 </text>
               </g>
-              <circle className="outer-ring" cx="250" cy="250" r="182" />
-              {SEGMENTS.map((seg) => (
-                <circle
+              <circle className="dots-ring" cx="250" cy="250" r={DOTS_RADIUS} />
+              {SEGMENTS.map((seg, i) => (
+                <g
                   key={seg.key}
-                  className={`seg ${active === seg.key ? "on" : ""}`}
+                  className={`seg-group ${active === seg.key ? "on" : ""} ${active !== seg.key && active !== "reg" ? "dim" : ""}`}
+                  style={{ "--i": i, "--dx": seg.dx, "--dy": seg.dy }}
                   onClick={() => setActive(seg.key)}
                   onMouseEnter={() => setActive(seg.key)}
-                  cx="250" cy="250" r="132"
-                  stroke={seg.color}
-                  strokeDasharray="197 633"
-                  transform={`rotate(${seg.rotate} 250 250)`}
-                />
+                >
+                  <path className="seg" d={SEGMENT_PATH} fill={seg.color} transform={`rotate(${seg.rotate} 250 250)`} />
+                  <text className="seg-letter" x={seg.lx} y={seg.ly}>
+                    {seg.letter}
+                  </text>
+                </g>
               ))}
-              <circle className="hub" cx="250" cy="250" r="98" />
             </svg>
-            <div className="wlabel" style={{ top: "126px", left: "94px" }}>PLAN<small>PLANEJAR</small></div>
-            <div className="wlabel" style={{ top: "126px", right: "94px" }}>DO<small>EXECUTAR</small></div>
-            <div className="wlabel" style={{ bottom: "172px", right: "88px" }}>CHECK<small>VERIFICAR</small></div>
-            <div className="wlabel" style={{ bottom: "172px", left: "98px" }}>ACT<small>AGIR</small></div>
-            <div className="whub"><b>PDCA</b><span>Melhoria contínua</span></div>
-            <button
-              className={`reg-pill ${active === "reg" ? "on" : ""}`}
-              onClick={() => setActive("reg")}
-              onMouseEnter={() => setActive("reg")}
-            >
-              ⚖ Assuntos Regulatórios
-            </button>
           </div>
 
           <div className="panel" key={active}>

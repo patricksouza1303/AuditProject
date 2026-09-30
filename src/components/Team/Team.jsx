@@ -33,9 +33,7 @@ export default function Team() {
     <section id="equipe">
       <div className="container">
         <Reveal className="section-head">
-          <span className="eyebrow">Quem somos</span>
-          <h2>Especialistas, uma frente cada, um único interlocutor.</h2>
-          <p>Sem ícones decorativos ao lado das fotos — só rosto, nome e a especialidade que resolve o seu problema.</p>
+          <h2>Quem Somos</h2>
         </Reveal>
 
         <div className="team-grid">
