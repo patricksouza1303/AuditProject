@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import "./Hero.css";
 
 const NORM_TAGS = ["ISO 9001", "ISO 13485", "ISO 14001", "RDC 665/2022", "RDC 48/2013"];
@@ -65,9 +64,9 @@ export default function Hero() {
             </p>
 
             <div className="hero-actions">
-              <Link to="/agendar" className="btn btn-primary btn-lg">
+              <a href="#normas" className="btn btn-primary btn-lg">
                 Agendar uma proposta →
-              </Link>
+              </a>
               <a href="#servicos" className="btn btn-ghost btn-lg">
                 Conhecer serviços
               </a>

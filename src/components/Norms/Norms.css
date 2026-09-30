@@ -18,7 +18,7 @@
 
 .ring-wrap {
   position: relative;
-  width: 126px; height: 126px;
+  width: 150px; height: 150px;
   margin: 0 auto 22px;
   display: grid;
   place-items: center;
@@ -51,23 +51,19 @@
 
 .ring-lbl { position: relative; z-index: 2; text-align: center; }
 .ring-lbl b { display: block; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); line-height: 1; }
-.ring-lbl i { display: block; font-size: 10.5px; font-style: normal; letter-spacing: 0.14em; color: var(--primary-dark); margin-top: 5px; font-weight: 700; }
+.ring-lbl i { display: block; font-size: 10.5px; font-style: normal; letter-spacing: 0.14em; color: var(--primary-dark); margin-bottom: 5px; font-weight: 700; }
+.ring-lbl.long b { font-size: 22px; }
 
-.norm-card h3 { font-size: 20px; margin-bottom: 6px; }
-.norm-tag { font-size: 12.5px; color: var(--text-muted); display: block; margin-bottom: 16px; }
-.norm-desc { font-size: 13.5px; line-height: 1.55; color: var(--text-muted); text-align: left; margin-bottom: 20px; }
+.norm-tag { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; min-height: 40px; }
 
-.norm-deliver { text-align: left; border-top: 1px solid var(--border-soft); padding-top: 18px; margin-bottom: 22px; }
-.norm-deliver li { font-size: 13.5px; color: var(--text); padding: 5px 0 5px 22px; position: relative; }
-.norm-deliver li::before {
-  content: "";
-  position: absolute;
-  left: 0; top: 12px;
-  width: 11px; height: 6px;
-  border-left: 2px solid var(--primary);
-  border-bottom: 2px solid var(--primary);
-  transform: rotate(-45deg);
+.norm-link {
+  display: block;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-dark);
 }
+.norm-link:hover { text-decoration: underline; }
 
 @media (max-width: 980px) {
   .norm-cards { grid-template-columns: 1fr; }
