@@ -1,0 +1,6 @@
+.admin-loading {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 14.5px;
+}
+.admin-panel .auth-head strong { color: var(--primary-dark); }

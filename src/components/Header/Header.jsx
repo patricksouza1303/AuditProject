@@ -24,7 +24,7 @@ export default function Header() {
       <div className="container">
         <a href="#top" className="logo">
           <span className="logo-check" aria-hidden="true">✓</span>
-          AuditISO
+          4Q-SGI
         </a>
 
         <div className="header-actions">

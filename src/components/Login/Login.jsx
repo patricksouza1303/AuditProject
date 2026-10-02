@@ -1,23 +1,36 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 import "./Login.css";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [status, setStatus] = useState("Entrar");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (email.trim() && password.length >= 4) {
-      setError(false);
-      setStatus("Entrando...");
-      setTimeout(() => setStatus("Acesso liberado ✓"), 700);
-    } else {
-      setError(true);
+    setError("");
+    setLoading(true);
+    try {
+      const r = await fetch("/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify({ user: email.trim(), password }),
+      });
+      const data = await r.json().catch(() => ({}));
+      if (!r.ok) {
+        setError(data.error || "Não foi possível entrar.");
+        return;
+      }
+      navigate("/admin/painel", { replace: true });
+    } catch {
+      setError("Falha de conexão com o servidor.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -40,7 +53,7 @@ export default function Login() {
       <div className="auth-card">
         <Link to="/" className="logo">
           <span className="logo-mark">A</span>
-          AuditISO
+          4Q-SGI
         </Link>
 
         <div className="auth-head">
@@ -53,7 +66,7 @@ export default function Login() {
             <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.8" />
             <path d="M12 8v5M12 16h.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
           </svg>
-          E-mail ou senha inválidos.
+          {error}
         </div>
 
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -93,8 +106,8 @@ export default function Login() {
             <label htmlFor="remember">Manter-me conectado</label>
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block btn-lg">
-            {status}
+          <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>
+            {loading ? "Entrando..." : "Entrar"}
           </button>
         </form>
 

@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <span>© {year} AuditISO. Todos os direitos reservados.</span>
+        <span>© {year} 4Q-SGI. Todos os direitos reservados.</span>
       </div>
     </footer>
   );
