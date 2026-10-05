@@ -5,7 +5,6 @@ import "./Header.css";
 
 const NAV_LINKS = [
   { href: "#processo", label: "Como atuamos" },
-  { href: "#equipe", label: "Quem somos" },
 ];
 
 export default function Header() {
@@ -37,7 +36,7 @@ export default function Header() {
           </nav>
           <ThemeToggle />
           <Link to="/login" className="btn btn-primary header-cta">
-            Acesso para funcionários
+            Acesso aos funcionários
           </Link>
           <button
             className="nav-toggle"

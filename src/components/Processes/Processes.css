@@ -1,10 +1,13 @@
 .process {
-  background: linear-gradient(155deg, #0b1b2b 0%, #0c2637 60%, #0a2f3a 100%);
-  color: #fff;
+  background: var(--bg-alt);
+  color: var(--text);
 }
-.process .eyebrow { background: rgba(255, 255, 255, 0.1); color: var(--gold-soft); }
-.process .section-head h2 { color: #fff; }
-.process .section-head p { color: rgba(255, 255, 255, 0.62); }
+:root[data-theme="dark"] .process {
+  background: linear-gradient(155deg, var(--navy) 0%, #0d2c36 55%, var(--petrol) 100%);
+}
+/* cores fixas do círculo PDCA, independentes da paleta */
+.wheel { --wheel-gold: #d4a73c; --wheel-gold-soft: #f0d48a; }
+.process .section-head p { color: var(--text-muted); }
 
 .pdca {
   display: grid;
@@ -33,17 +36,19 @@
 .reg-ring.on .reg-band, .reg-ring:hover .reg-band { stroke: rgba(212, 167, 60, 0.5); }
 .reg-ring:hover { filter: drop-shadow(0 12px 16px rgba(212, 167, 60, 0.45)); }
 .reg-text {
-  fill: var(--gold-soft);
+  fill: var(--wheel-gold-soft);
   font-size: 13px;
   font-weight: 800;
   dominant-baseline: central;
   pointer-events: none;
 }
+/* no tema claro o dourado claro some no fundo branco: usa o mesmo dourado, mais escuro */
+:root:not([data-theme="dark"]) .reg-text { fill: #8a6620; }
 
 /* pontos entre o anel externo e o círculo, girando no sentido anti-horário */
 .dots-ring {
   fill: none;
-  stroke: var(--gold);
+  stroke: var(--wheel-gold);
   stroke-width: 3;
   stroke-linecap: round;
   stroke-dasharray: 0 14;
@@ -94,16 +99,15 @@
 
 .panel { min-height: 300px; animation: pdcaSwap 0.5s cubic-bezier(.16,1,.3,1); }
 @keyframes pdcaSwap { from { opacity: 0; transform: translateX(16px); } to { opacity: 1; transform: none; } }
-.panel .eyebrow { background: rgba(255, 255, 255, 0.1); color: var(--gold-soft); }
-.panel h3 { font-size: 30px; margin: 12px 0 14px; color: #fff; }
-.panel > p { color: rgba(255, 255, 255, 0.72); margin-bottom: 22px; font-size: 16px; }
+.panel h3 { font-size: 30px; margin: 12px 0 14px; }
+.panel > p { color: var(--text-muted); margin-bottom: 22px; font-size: 16px; }
 .panel ul { list-style: none; }
 .panel li {
   padding: 11px 0 11px 30px;
   position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  border-bottom: 1px solid var(--border-soft);
   font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.88);
+  color: var(--text);
 }
 .panel li::before {
   content: "";

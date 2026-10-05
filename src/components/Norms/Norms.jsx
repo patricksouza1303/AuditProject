@@ -18,15 +18,24 @@ const NORMS = [
     officialUrl: "https://www.iso.org/standard/59752.html",
   },
   {
+    num: "22000",
+    kicker: "ISO",
+    title: "ISO 22000",
+    tag: "Sistemas de gestão da segurança de alimentos",
+    officialUrl: "https://www.iso.org/standard/65464.html",
+  },
+  {
     num: "665/2022",
     kicker: "RDC",
     title: "RDC 665/2022",
-    tag: "Boas Práticas de Fabricação (BPF) para produtos médicos e para diagnóstico de uso in vitro",
+    tag: "Boas Práticas de Fabricação para produtos médicos e para diagnóstico de uso in vitro",
     officialUrl: "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2022/rdc-665-de-2022",
   },
 ];
 
-const EMPTY_FORM = { name: "", company: "", email: "", phone: "", message: "" };
+const AREAS = ["Todos", "Fabricante", "Distribuidor", "Importador", "Laboratório", "Transportador", "Armazenagem"];
+
+const EMPTY_FORM = { name: "", company: "", email: "", phone: "", area: "", message: "" };
 
 // tempos das animações (ms)
 const FADE_MS = 220;
@@ -121,8 +130,8 @@ export default function Norms() {
     setForm(EMPTY_FORM);
   };
 
-  // o último card abre a janela à esquerda; os demais, à direita
-  const side = selected === NORMS.length - 1 ? "right" : "left";
+  // cards da metade esquerda vão para a esquerda (janela à direita); os da metade direita, para a direita
+  const side = selected < NORMS.length / 2 ? "left" : "right";
   const norm = selected !== null ? NORMS[selected] : null;
 
   const cardClass = (i) => {
@@ -165,7 +174,6 @@ export default function Norms() {
               <button type="button" className="norm-booking-close" onClick={close} aria-label="Fechar">
                 ×
               </button>
-              <span className="eyebrow">Iniciar agendamento</span>
               <h3>{norm.title}</h3>
               <p className="norm-booking-intro">
                 Preencha seus dados e nossa equipe entra em contato para agendar a sua auditoria.
@@ -191,6 +199,20 @@ export default function Norms() {
                   <label htmlFor="nb-phone">Telefone</label>
                   <input id="nb-phone" type="tel" placeholder="(00) 00000-0000" value={form.phone} onChange={handleChange("phone")} required />
                 </div>
+              </div>
+
+              <div className="field">
+                <label htmlFor="nb-area">Selecione a área</label>
+                <select id="nb-area" value={form.area} onChange={handleChange("area")} required>
+                  <option value="" disabled>
+                    Selecione
+                  </option>
+                  {AREAS.map((a) => (
+                    <option key={a} value={a}>
+                      {a}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="field">

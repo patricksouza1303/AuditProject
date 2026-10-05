@@ -1,4 +1,4 @@
-.services { background: var(--bg-soft); }
+.services { background: var(--bg-alt); }
 .card-grid {
   display: flex;
   flex-wrap: wrap;
@@ -8,7 +8,9 @@
 .service-card {
   background: var(--surface);
   border: 1px solid var(--border-soft);
+  border-top: 3px solid var(--gold);
   border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
   flex: 0 0 calc((100% - 44px) / 3);
   padding: 28px 26px;
   text-align: center;
@@ -18,6 +20,7 @@
   transform: translateY(-6px);
   box-shadow: var(--shadow-md);
   border-color: var(--border);
+  border-top-color: var(--gold);
 }
 .service-card h3 {
   font-size: 22px;

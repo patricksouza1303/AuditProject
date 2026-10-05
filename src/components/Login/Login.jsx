@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 import "./Login.css";
 
 export default function Login() {
@@ -34,11 +33,6 @@ export default function Login() {
     }
   };
 
-  const handleForgot = (e) => {
-    e.preventDefault();
-    alert("Entre em contato com o administrador para redefinir sua senha.");
-  };
-
   return (
     <div className="auth-page">
       <Link to="/" className="auth-back">
@@ -48,17 +42,9 @@ export default function Login() {
         Voltar ao site
       </Link>
 
-      <ThemeToggle className="auth-theme-toggle" />
-
       <div className="auth-card">
-        <Link to="/" className="logo">
-          <span className="logo-mark">A</span>
-          4Q-SGI
-        </Link>
-
         <div className="auth-head">
-          <h1>Acesso dos Auditores</h1>
-          <p>Entre com suas credenciais para acessar o painel de auditorias.</p>
+          <h1>Acesso aos funcionários</h1>
         </div>
 
         <div className={`auth-error ${error ? "show" : ""}`}>
@@ -75,7 +61,7 @@ export default function Login() {
             <input
               id="email"
               type="email"
-              placeholder="auditor@auditcompany.com.br"
+              placeholder="voce@empresa.com.br"
               autoComplete="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -84,12 +70,7 @@ export default function Login() {
           </div>
 
           <div className="field">
-            <div className="field-between">
-              <label htmlFor="password">Senha</label>
-              <a href="#" className="link-muted" onClick={handleForgot}>
-                Esqueceu a senha?
-              </a>
-            </div>
+            <label htmlFor="password">Senha</label>
             <input
               id="password"
               type="password"
@@ -101,21 +82,10 @@ export default function Login() {
             />
           </div>
 
-          <div className="checkbox-row">
-            <input type="checkbox" id="remember" />
-            <label htmlFor="remember">Manter-me conectado</label>
-          </div>
-
           <button type="submit" className="btn btn-primary btn-block btn-lg" disabled={loading}>
             {loading ? "Entrando..." : "Entrar"}
           </button>
         </form>
-
-        <div className="auth-divider">acesso restrito</div>
-
-        <p className="auth-footer-text">
-          Ainda não tem acesso? <a href="#contato-login">Solicite ao administrador</a>
-        </p>
       </div>
     </div>
   );

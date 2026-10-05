@@ -7,8 +7,8 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(700px 400px at 10% 0%, rgba(23,162,162,0.16), transparent 60%),
-    radial-gradient(600px 380px at 95% 100%, rgba(212,167,60,0.14), transparent 60%),
+    radial-gradient(700px 400px at 10% 0%, rgba(23, 74, 70, 0.18), transparent 60%),
+    radial-gradient(600px 380px at 95% 100%, rgba(197, 164, 109, 0.2), transparent 60%),
     var(--bg);
 }
 .auth-back {
@@ -51,13 +51,7 @@
 .auth-head p { margin-top: 10px; color: var(--text-muted); font-size: 14.5px; }
 
 .auth-form .field { margin-bottom: 18px; }
-.field-between { display: flex; justify-content: space-between; align-items: center; }
-.link-muted { font-size: 13px; color: var(--primary-dark); font-weight: 600; }
-.link-muted:hover { text-decoration: underline; }
-
-.checkbox-row { display: flex; align-items: center; gap: 8px; margin: 18px 0 24px; }
-.checkbox-row input { width: 16px; height: 16px; accent-color: var(--primary); }
-.checkbox-row label { font-size: 13.5px; color: var(--text-muted); }
+.auth-form .btn { margin-top: 8px; }
 
 .auth-divider {
   display: flex; align-items: center; gap: 14px;
@@ -68,9 +62,6 @@
 .auth-divider::before, .auth-divider::after {
   content: ""; flex: 1; height: 1px; background: var(--border-soft);
 }
-
-.auth-footer-text { text-align: center; margin-top: 24px; font-size: 14px; color: var(--text-muted); }
-.auth-footer-text a { color: var(--primary-dark); font-weight: 600; }
 
 .auth-error {
   display: none;

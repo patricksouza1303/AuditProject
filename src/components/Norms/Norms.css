@@ -1,7 +1,7 @@
 .norm-cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 26px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
 }
 
 .norm-card {
@@ -9,9 +9,12 @@
   background: var(--surface);
   border: 1px solid var(--border-soft);
   border-radius: 20px;
-  padding: 38px 30px 30px;
+  box-shadow: var(--shadow-sm);
+  padding: 36px 24px 28px;
   text-align: center;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.5s cubic-bezier(.16,1,.3,1), box-shadow 0.5s cubic-bezier(.16,1,.3,1), border-color 0.5s cubic-bezier(.16,1,.3,1);
 }
 .norm-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); border-color: transparent; }
@@ -46,7 +49,7 @@
   transition: box-shadow 0.5s cubic-bezier(.16,1,.3,1);
 }
 .norm-card:hover .ring-wrap::after {
-  box-shadow: inset 0 0 0 2px transparent, 0 0 34px rgba(212, 167, 60, 0.5);
+  box-shadow: inset 0 0 0 2px transparent, 0 0 34px var(--gold-glow);
 }
 
 .ring-lbl { position: relative; z-index: 2; text-align: center; }
@@ -54,7 +57,7 @@
 .ring-lbl i { display: block; font-size: 10.5px; font-style: normal; letter-spacing: 0.14em; color: var(--primary-dark); margin-bottom: 5px; font-weight: 700; }
 .ring-lbl.long b { font-size: 22px; }
 
-.norm-tag { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; min-height: 40px; }
+.norm-tag { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; flex: 1; }
 
 .norm-link {
   display: block;
@@ -78,9 +81,9 @@
 @keyframes normBack { from { opacity: 0; transform: scale(0.94); } }
 
 .norm-cards.open-left .norm-card.selected { grid-column: 1; grid-row: 1; }
-.norm-cards.open-left .norm-booking { grid-column: 2 / span 2; grid-row: 1; }
-.norm-cards.open-right .norm-card.selected { grid-column: 3; grid-row: 1; }
-.norm-cards.open-right .norm-booking { grid-column: 1 / span 2; grid-row: 1; }
+.norm-cards.open-left .norm-booking { grid-column: 2 / span 3; grid-row: 1; }
+.norm-cards.open-right .norm-card.selected { grid-column: 4; grid-row: 1; }
+.norm-cards.open-right .norm-booking { grid-column: 1 / span 3; grid-row: 1; }
 
 .norm-booking {
   position: relative;

@@ -134,7 +134,7 @@ export default function Processes() {
     <section className="process" id="processo">
       <div className="container">
         <Reveal className="section-head">
-          <h2>Como Trabalhamos</h2>
+          <h2>Como Atuamos</h2>
         </Reveal>
 
         <Reveal className="pdca">

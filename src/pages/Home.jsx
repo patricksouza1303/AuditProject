@@ -4,7 +4,6 @@ import Hero from "../components/Hero/Hero.jsx";
 import Services from "../components/Services/Services.jsx";
 import Norms from "../components/Norms/Norms.jsx";
 import Processes from "../components/Processes/Processes.jsx";
-import Team from "../components/Team/Team.jsx";
 import Contact from "../components/Contact/Contact.jsx";
 import Footer from "../components/Footer/Footer.jsx";
 
@@ -18,7 +17,6 @@ export default function Home() {
         <Services />
         <Norms />
         <Processes />
-        <Team />
         <Contact />
       </main>
       <Footer />

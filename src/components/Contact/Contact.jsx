@@ -28,7 +28,7 @@ const CONTACT_ITEMS = [
   },
   {
     label: "Endereço",
-    value: "Curitiba - PR",
+    value: "Curitiba e Região Metropolitana",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#fff" strokeWidth="1.6" />
