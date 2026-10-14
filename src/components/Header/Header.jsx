@@ -4,7 +4,10 @@ import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
 import "./Header.css";
 
 const NAV_LINKS = [
+  { href: "#servicos", label: "Nossos serviços" },
+  { href: "#normas", label: "Normas que abrangemos" },
   { href: "#processo", label: "Como atuamos" },
+  { href: "#contato", label: "Contatos" },
 ];
 
 export default function Header() {
@@ -26,18 +29,19 @@ export default function Header() {
           4Q-SGI
         </a>
 
+        <nav className="nav-links">
+          {NAV_LINKS.map((link) => (
+            <a key={link.href} href={link.href}>
+              {link.label}
+            </a>
+          ))}
+        </nav>
+
         <div className="header-actions">
-          <nav className="nav-links">
-            {NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href}>
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <ThemeToggle />
-          <Link to="/login" className="btn btn-primary header-cta">
+          <Link to="/login" className="header-cta">
             Acesso aos funcionários
           </Link>
+          <ThemeToggle />
           <button
             className="nav-toggle"
             aria-label="Abrir menu"
@@ -58,7 +62,7 @@ export default function Header() {
           <span>Tema</span>
           <ThemeToggle />
         </div>
-        <Link to="/login" className="btn btn-primary" onClick={() => setOpen(false)}>
+        <Link to="/login" onClick={() => setOpen(false)}>
           Acesso para funcionários
         </Link>
       </div>

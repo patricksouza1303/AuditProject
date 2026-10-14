@@ -6,6 +6,7 @@ import Norms from "../components/Norms/Norms.jsx";
 import Processes from "../components/Processes/Processes.jsx";
 import Contact from "../components/Contact/Contact.jsx";
 import Footer from "../components/Footer/Footer.jsx";
+import BackToTop from "../components/BackToTop/BackToTop.jsx";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <BackToTop />
     </>
   );
 }

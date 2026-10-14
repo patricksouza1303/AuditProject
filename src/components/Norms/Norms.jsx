@@ -8,7 +8,7 @@ const NORMS = [
     kicker: "ISO",
     title: "ISO 9001",
     tag: "Sistemas de gestão da qualidade",
-    officialUrl: "https://www.iso.org/standard/62085.html",
+    officialUrl: "https://www.iso.org/standard/9001",
   },
   {
     num: "13485",
