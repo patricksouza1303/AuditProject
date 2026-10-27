@@ -38,10 +38,10 @@ export default function Header() {
         </nav>
 
         <div className="header-actions">
+          <ThemeToggle />
           <Link to="/login" className="header-cta">
             Acesso aos funcionários
           </Link>
-          <ThemeToggle />
           <button
             className="nav-toggle"
             aria-label="Abrir menu"

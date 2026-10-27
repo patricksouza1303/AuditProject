@@ -4,6 +4,8 @@ import "./Contact.css";
 const CONTACT_ITEMS = [
   {
     label: "Telefone",
+    // escondido até termos o número oficial; remover a flag para voltar a exibir
+    hidden: true,
     value: "(41) 99999-9999",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
@@ -28,7 +30,7 @@ const CONTACT_ITEMS = [
   },
   {
     label: "Endereço",
-    value: "Curitiba e Região Metropolitana",
+    value: "Curitiba e Região Metropolitana · São Bento - SC",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z" stroke="#fff" strokeWidth="1.6" />
@@ -38,6 +40,8 @@ const CONTACT_ITEMS = [
   },
 ];
 
+const VISIBLE_ITEMS = CONTACT_ITEMS.filter((item) => !item.hidden);
+
 export default function Contact() {
   return (
     <section id="contato">
@@ -46,8 +50,8 @@ export default function Contact() {
           <h2>Fale Conosco</h2>
         </Reveal>
 
-        <div className="contact-grid">
-          {CONTACT_ITEMS.map((item) => (
+        <div className="contact-grid" style={{ "--cols": VISIBLE_ITEMS.length }}>
+          {VISIBLE_ITEMS.map((item) => (
             <Reveal as="div" className="contact-card" key={item.label}>
               <div className="ci">{item.icon}</div>
               <h4>{item.label}</h4>

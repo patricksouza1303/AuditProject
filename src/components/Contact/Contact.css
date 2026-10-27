@@ -1,7 +1,7 @@
 
 .contact-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
   gap: 22px;
 }
 /* mesmo estilo dos cards de serviços: superfície do tema com filete dourado no topo */
