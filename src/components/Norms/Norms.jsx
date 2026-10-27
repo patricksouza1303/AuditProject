@@ -29,7 +29,7 @@ const NORMS = [
     kicker: "RDC",
     title: "RDC 665/2022",
     tag: "Boas Práticas de Fabricação para produtos médicos e para diagnóstico de uso in vitro",
-    officialUrl: "https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa/2022/rdc-665-de-2022",
+    officialUrl: "https://www.in.gov.br/en/web/dou/-/resolucao-rdc-n-665-de-30-de-marco-de-2022-389909119",
   },
 ];
 
