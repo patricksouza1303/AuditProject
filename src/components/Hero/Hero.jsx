@@ -18,8 +18,8 @@ export default function Hero() {
               Sua empresa pronta <span className="grad">para qualquer auditoria.</span>
             </h1>
             <p>
-              Auditamos o seu sistema de Gestão da Qualidade nas normas ISO 13485, ISO 9001 e RDC 665/2022
-              para fabricantes, importadores e distribuidores de produtos para saúde.
+              Realizamos auditorias em Sistemas de Gestão da Qualidade, com foco na avaliação da conformidade
+              e na melhoria contínua, conforme os requisitos das normas ISO 13485, RDC 665/2022, ISO 9001 e ISO 22000.
             </p>
 
             <div className="hero-actions">

@@ -178,6 +178,16 @@ input, textarea, select { font-family: inherit; }
 
 section { position: relative; padding: 100px 0; }
 
+/* seção do tamanho da tela (descontado o header): ao navegar até ela, a anterior e a seguinte não aparecem */
+.section-screen {
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.section-screen > .container { width: 100%; }
+
 /* ---------- Buttons (shared across Header, Hero, Norms, Login) ---------- */
 .btn {
   display: inline-flex;

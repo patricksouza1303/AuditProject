@@ -5,7 +5,7 @@ const SERVICES = [
   {
     title: "Gestão da Qualidade",
     description:
-      "ISO 13485, ISO 9001 e RDC 665/2022 — Boas Práticas de Fabricação, Armazenamento e Distribuição para fabricantes, importadores e distribuidores de produtos para saúde.",
+      "Desenvolvimento de sistemas de gestão robustos e eficientes, que asseguram a conformidade dos seus produtos e processos e aumentam a confiança de clientes e parceiros.",
   },
   {
     title: "Consultoria em Sistemas de Gestão Integrada",
@@ -31,7 +31,7 @@ const SERVICES = [
 
 export default function Services() {
   return (
-    <section className="services" id="servicos">
+    <section className="services section-screen" id="servicos">
       <div className="container">
         <Reveal className="section-head">
           <h2>Nossos Serviços</h2>

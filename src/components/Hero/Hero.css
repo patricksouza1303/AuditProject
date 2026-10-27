@@ -1,5 +1,10 @@
 .hero {
   padding: calc(var(--header-h) + 56px) 0 80px;
+  /* ocupa a tela inteira na abertura do site */
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
   position: relative;
   overflow: hidden;
   background: var(--navy) url("../../assets/hero-bg.jpg") center / cover no-repeat;

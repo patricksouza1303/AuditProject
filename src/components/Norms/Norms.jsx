@@ -1,4 +1,4 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Reveal from "../Reveal/Reveal.jsx";
 import "./Norms.css";
 
@@ -33,9 +33,9 @@ const NORMS = [
   },
 ];
 
-const AREAS = ["Todos", "Fabricante", "Distribuidor", "Importador", "Laboratório", "Transportador", "Armazenagem"];
+const AREAS = ["Fabricante", "Distribuidor", "Importador", "Laboratório", "Transportador", "Armazenagem"];
 
-const EMPTY_FORM = { name: "", company: "", email: "", phone: "", area: "", message: "" };
+const EMPTY_FORM = { name: "", company: "", email: "", phone: "", areas: [], message: "" };
 
 // tempos das animações (ms)
 const FADE_MS = 220;
@@ -51,6 +51,7 @@ export default function Norms() {
   const [closing, setClosing] = useState(false);
   const [form, setForm] = useState(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
+  const [areaError, setAreaError] = useState(false);
   const gridRef = useRef(null);
   const flipFrom = useRef(null);
 
@@ -65,6 +66,7 @@ export default function Norms() {
     if (selected !== null || leaving !== null) return;
     setForm(EMPTY_FORM);
     setSubmitted(false);
+    setAreaError(false);
 
     if (prefersReducedMotion()) {
       setSelected(i);
@@ -124,8 +126,21 @@ export default function Norms() {
 
   const handleChange = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
+  const toggleArea = (area) => {
+    setAreaError(false);
+    setForm((f) => ({
+      ...f,
+      areas: f.areas.includes(area) ? f.areas.filter((a) => a !== area) : [...f.areas, area],
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    // a lista de áreas não é um campo nativo, então a obrigatoriedade é conferida aqui
+    if (form.areas.length === 0) {
+      setAreaError(true);
+      return;
+    }
     setSubmitted(true);
     setForm(EMPTY_FORM);
   };
@@ -144,7 +159,7 @@ export default function Norms() {
   };
 
   return (
-    <section id="normas">
+    <section className="section-screen" id="normas">
       <div className="container">
         <Reveal className="section-head">
           <h2>Normas que Abrangemos</h2>
@@ -176,7 +191,7 @@ export default function Norms() {
               </button>
               <h3>{norm.title}</h3>
               <p className="norm-booking-intro">
-                Preencha seus dados e nossa equipe entra em contato para agendar a sua auditoria.
+                Preencha seus dados e nossa equipe entrará em contato para agendar a sua auditoria.
               </p>
 
               <div className="form-row">
@@ -202,17 +217,9 @@ export default function Norms() {
               </div>
 
               <div className="field">
-                <label htmlFor="nb-area">Selecione a área</label>
-                <select id="nb-area" value={form.area} onChange={handleChange("area")} required>
-                  <option value="" disabled>
-                    Selecione
-                  </option>
-                  {AREAS.map((a) => (
-                    <option key={a} value={a}>
-                      {a}
-                    </option>
-                  ))}
-                </select>
+                <label id="nb-area-label">Selecione a área</label>
+                <AreaSelect labelId="nb-area-label" value={form.areas} onToggle={toggleArea} invalid={areaError} />
+                {areaError && <p className="area-error">Selecione pelo menos uma área.</p>}
               </div>
 
               <div className="field">
@@ -240,5 +247,77 @@ export default function Norms() {
         </div>
       </div>
     </section>
+  );
+}
+
+// Mesmo visual do select, mas com caixa de marcação em cada opção para permitir várias áreas
+function AreaSelect({ labelId, value, onToggle, invalid }) {
+  const [open, setOpen] = useState(false);
+  const [closing, setClosing] = useState(false);
+  const ref = useRef(null);
+
+  // ao fechar, a lista continua na tela até a animação de saída terminar
+  const close = () => setClosing(true);
+  const toggle = () => {
+    if (open && !closing) close();
+    else {
+      setClosing(false);
+      setOpen(true);
+    }
+  };
+  const handleAnimationEnd = () => {
+    if (!closing) return;
+    setClosing(false);
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (e) => {
+      if (!ref.current.contains(e.target)) close();
+    };
+    const onKey = (e) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("mousedown", onClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div className={`area-select ${open && !closing ? "open" : ""} ${invalid ? "invalid" : ""}`} ref={ref}>
+      <button
+        type="button"
+        className="area-select-trigger"
+        aria-haspopup="listbox"
+        aria-expanded={open && !closing}
+        aria-labelledby={labelId}
+        onClick={toggle}
+      >
+        {value.length ? AREAS.filter((a) => value.includes(a)).join(", ") : <span className="area-select-placeholder">Selecione</span>}
+      </button>
+
+      {open && (
+        <ul
+          className={`area-select-options ${closing ? "closing" : ""}`}
+          onAnimationEnd={handleAnimationEnd}
+          role="listbox"
+          aria-multiselectable="true"
+          aria-labelledby={labelId}
+        >
+          {AREAS.map((a) => (
+            <li key={a}>
+              <label>
+                <input type="checkbox" checked={value.includes(a)} onChange={() => onToggle(a)} />
+                {a}
+              </label>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
