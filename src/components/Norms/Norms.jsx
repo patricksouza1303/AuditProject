@@ -35,7 +35,8 @@ const NORMS = [
 
 const AREAS = ["Fabricante", "Distribuidor", "Importador", "Laboratório", "Transportador", "Armazenagem"];
 
-const EMPTY_FORM = { name: "", company: "", email: "", phone: "", areas: [], message: "" };
+// "website" é a armadilha para robôs: fica invisível e deve chegar vazio à API
+const EMPTY_FORM = { name: "", company: "", email: "", phone: "", areas: [], message: "", website: "" };
 
 // tempos das animações (ms)
 const FADE_MS = 220;
@@ -52,6 +53,8 @@ export default function Norms() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [submitted, setSubmitted] = useState(false);
   const [areaError, setAreaError] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState(false);
   const gridRef = useRef(null);
   const flipFrom = useRef(null);
 
@@ -67,6 +70,7 @@ export default function Norms() {
     setForm(EMPTY_FORM);
     setSubmitted(false);
     setAreaError(false);
+    setSendError(false);
 
     if (prefersReducedMotion()) {
       setSelected(i);
@@ -134,15 +138,33 @@ export default function Norms() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (sending) return;
     // a lista de áreas não é um campo nativo, então a obrigatoriedade é conferida aqui
     if (form.areas.length === 0) {
       setAreaError(true);
       return;
     }
-    setSubmitted(true);
-    setForm(EMPTY_FORM);
+
+    setSending(true);
+    setSubmitted(false);
+    setSendError(false);
+    try {
+      const r = await fetch("/api/agendamento", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, areas: AREAS.filter((a) => form.areas.includes(a)) }),
+      });
+      if (!r.ok) throw new Error(`HTTP ${r.status}`);
+      setSubmitted(true);
+      setForm(EMPTY_FORM);
+    } catch {
+      // mantém o que a pessoa digitou para ela poder tentar de novo
+      setSendError(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   // cards da metade esquerda vão para a esquerda (janela à direita); os da metade direita, para a direita
@@ -232,9 +254,26 @@ export default function Norms() {
                 ></textarea>
               </div>
 
-              <button type="submit" className="btn btn-primary btn-block">
-                Enviar solicitação
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                style={{ display: "none" }}
+                value={form.website}
+                onChange={handleChange("website")}
+              />
+
+              <button type="submit" className="btn btn-primary btn-block" disabled={sending}>
+                {sending ? "Enviando..." : "Enviar solicitação"}
               </button>
+
+              {sendError && (
+                <p className="area-error" role="alert">
+                  Não foi possível enviar sua solicitação. Tente novamente em instantes.
+                </p>
+              )}
 
               <div className={`form-success ${submitted ? "show" : ""}`}>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
