@@ -154,7 +154,7 @@ export default function Norms() {
       const r = await fetch("/api/agendamento", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, areas: AREAS.filter((a) => form.areas.includes(a)) }),
+        body: JSON.stringify({ ...form, norm: norm.title, areas: AREAS.filter((a) => form.areas.includes(a)) }),
       });
       if (!r.ok) throw new Error(`HTTP ${r.status}`);
       setSubmitted(true);

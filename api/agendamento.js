@@ -24,6 +24,7 @@ export default async function handler(req, res) {
   // Campo invisível para pessoas: se veio preenchido, foi um robô. Responde ok e não envia nada.
   if (body?.website) return sendJson(res, 200, { ok: true });
 
+  const norm = clean(body?.norm);
   const name = clean(body?.name);
   const company = clean(body?.company);
   const email = clean(body?.email);
@@ -47,6 +48,7 @@ export default async function handler(req, res) {
     `E-mail: ${email}`,
     `Telefone: ${phone}`,
     `Área: ${areas.join(", ")}`,
+    `Norma: ${norm}`,
     `Mensagem: ${message}`,
   ].join("\n");
 
