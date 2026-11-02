@@ -230,7 +230,7 @@ export default function Norms() {
               <div className="form-row">
                 <div className="field">
                   <label htmlFor="nb-email">E-mail</label>
-                  <input id="nb-email" type="email" placeholder="voce@empresa.com" value={form.email} onChange={handleChange("email")} required />
+                  <input id="nb-email" type="email" placeholder="voce@empresa.com" pattern="[^\s@]+@[^\s@]+\.[^\s@]+" title="Informe um e-mail completo, como voce@empresa.com" value={form.email} onChange={handleChange("email")} required />
                 </div>
                 <div className="field">
                   <label htmlFor="nb-phone">Telefone</label>
