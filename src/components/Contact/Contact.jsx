@@ -20,7 +20,7 @@ const CONTACT_ITEMS = [
   },
   {
     label: "E-mail",
-    value: "contato@auditcompany.com.br",
+    value: "-",
     icon: (
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
         <path d="M4 6h16v12H4z" stroke="#fff" strokeWidth="1.6" />
